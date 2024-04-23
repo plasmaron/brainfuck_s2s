@@ -2,7 +2,9 @@ use std::io;
 mod macros;
 fn main() -> std::io::Result<()> {
     demos::hello_world()?;
-    demos::ascii_numbers()?;
+    // demos::ascii_numbers()?;
+    // demos::squares_to_10000()?;
+    // demos::rot13()?;
     Ok(())
 }
 
@@ -52,6 +54,56 @@ mod demos {
     pub fn panics() -> std::io::Result<()> {
         // Brings the data pointer below 0
         macros::brainfuck!(><<);
+        Ok(())
+    }
+
+    pub fn squares_to_10000() -> std::io::Result<()> {
+        // Prints the square numbers from 1 to 10000
+        macros::brainfuck!(++++[>+++++<-]>[<+++++>-]+<+[
+        >[>+>+<<-]++>>[<<+>>-]>>>[-]++>[-]+
+        >>>+[[-]++++++>>>]<<<[[<++++++++<++>>-]+<.<[>----<-]<]
+        <<[>>>>>[>>>[-]+++++++++<[>-<-]+++++++++>[-[<->-]+[<<<]]<[>+<-]>]<<-]<<-
+        ]);
+        Ok(())
+    }
+
+    pub fn rot13() -> std::io::Result<()> {
+        //ROT13
+        macros::brainfuck!(-,+[
+    -[
+        >>++++[>++++++++<-]
+
+        <+<-[
+            >+>+>-[>>>]
+            <[[>+<-]>>+>]
+            <<<<<-
+        ]
+    ]>>>[-]+
+    >--[-[<->[-]]]<[
+        ++++++++++++<[
+
+            >-[>+>>]
+            >[+[<+>-]>+>>]
+            <<<<<-
+        ]
+        >>[<+>-]
+        >[
+            -[
+                -<<[-]>>
+            ]<<[<<->>-]>>
+        ]<<[<<+>>-]
+    ]
+    <[-]
+    <.[-]
+    <-,+
+] );
+        Ok(())
+    }
+
+    pub fn test() -> std::io::Result<()>
+    {
+        macros::brainfuck!(
+>,>+++++++++,>+++++++++++[<++++++<++++++<+>>>-]<<.>.<<-.>.>.<<.);
         Ok(())
     }
 }
